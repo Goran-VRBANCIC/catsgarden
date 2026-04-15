@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cahier des Charges — Site Vitrine CAT'S GARDEN</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap');
+
+/* ─── VARIABLES ─────────────────────────────────── */
+:root {
+  --bg:           #f5f0e8;
+  --bg-dark:      #ece6d8;
+  --bg-card:      #fdfbf7;
+  --primary:      #3a6e2f;
+  --primary-dark: #2d5625;
+  --accent:       #5a9e47;
+  --text:         #2c2c2c;
+  --text-muted:   #6b6b6b;
+  --border:       #d0c8b0;
+  --border-light: #e6e0d4;
+  --white:        #ffffff;
+  --header-h:     62px;
+  --sidebar-w:    268px;
+  --font-title:   'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Lato', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  --radius:       6px;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.07);
+  --shadow:       0 3px 12px rgba(58,110,47,0.12);
+}
+
+/* ─── RESET ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+:target {
+  scroll-margin-top: calc(var(--header-h) + 34px);
+}
+
+/* ─── STICKY HEADER ─────────────────────────────── */
+.doc-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--header-h);
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 28px;
+  max-width: 1260px;
+  margin: 0 auto;
+  gap: 16px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.header-paw { font-size: 24px; flex-shrink: 0; }
+.header-titles { min-width: 0; }
+.header-titles h1 {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+.header-org {
+  font-size: 11.5px;
+  font-weight: 300;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.version-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 11px;
+  border-radius: 100px;
+}
+.header-date {
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────── */
+.layout {
+  display: flex;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+/* ─── SIDEBAR ────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+}
+.sidebar-inner { padding: 28px 16px 28px 24px; }
+.sidebar-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-left: 8px;
+}
+.sidebar nav ul { list-style: none; }
+.sidebar nav li { margin-bottom: 2px; }
+.sidebar nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 7px 8px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+.sidebar nav a:hover {
+  background: var(--bg-dark);
+  color: var(--primary);
+}
+.nav-num {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary);
+  flex-shrink: 0;
+  width: 17px;
+  text-align: right;
+}
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 18px 8px;
+}
+.sidebar-meta {
+  padding: 0 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 2;
+}
+.sidebar-meta strong { color: var(--primary); }
+
+/* ─── MAIN CONTENT ────────────────────────────────── */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 44px 52px 88px;
+}
+
+/* ─── COVER ──────────────────────────────────────── */
+.cover {
+  text-align: center;
+  padding: 52px 24px 60px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 52px;
+}
+.cover-emblem {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+.cover-title {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.cover-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.cover-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cover-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.cover-tag.green {
+  background: var(--primary);
+  color: var(--white);
+}
+.cover-tag.outline {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+}
+
+/* ─── SECTIONS ────────────────────────────────────── */
+section {
+  margin-bottom: 60px;
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+section > h2 {
+  font-family: var(--font-title);
+  font-size: clamp(20px, 2.8vw, 27px);
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--primary);
+}
+.section-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  color: var(--white);
+  font-family: var(--font-title);
+  font-size: 19px;
+  font-weight: 900;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── SUB-SECTIONS ────────────────────────────────── */
+.sub { margin-bottom: 30px; }
+.sub h3 {
+  font-family: var(--font-title);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.sub h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 19px;
+  background: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+p { margin-bottom: 12px; }
+p:last-child { margin-bottom: 0; }
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-light);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--primary-dark);
+}
+
+/* ─── TABLES ──────────────────────────────────────── */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 14px 0 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table th {
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 11px 16px;
+  text-align: left;
+}
+table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: 1.55;
+}
+table tr:last-child td { border-bottom: none; }
+table tbody tr:nth-child(even) td { background: rgba(0,0,0,0.018); }
+table tbody tr:hover td { background: rgba(58,110,47,0.045); }
+table td:first-child {
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  width: 30%;
+}
+table td a { color: var(--accent); text-decoration: none; }
+table td a:hover { text-decoration: underline; }
+
+/* ─── MISSION LIST ────────────────────────────────── */
+ul.mission {
+  list-style: none;
+  margin: 8px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+ul.mission li {
+  padding: 10px 16px 10px 42px;
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14.5px;
+}
+ul.mission li:last-child { border-bottom: none; }
+ul.mission li::before {
+  content: '▸';
+  position: absolute;
+  left: 16px;
+  color: var(--accent);
+  font-size: 13px;
+  top: 12px;
+}
+
+/* ─── CHECKLIST ───────────────────────────────────── */
+ul.checklist {
+  list-style: none;
+  margin: 8px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+ul.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+ul.checklist li:last-child { border-bottom: none; }
+.check {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+/* ─── STEPS ───────────────────────────────────────── */
+ol.steps {
+  list-style: none;
+  margin: 8px 0;
+  counter-reset: step;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+ol.steps li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border-light);
+  counter-increment: step;
+}
+ol.steps li:last-child { border-bottom: none; }
+.step-n {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: var(--bg-dark);
+  border: 2px solid var(--border);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--font-title);
+  margin-top: 1px;
+}
+.step-body strong {
+  color: var(--primary);
+  font-size: 14.5px;
+  display: block;
+  margin-bottom: 2px;
+}
+.step-body span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.step-body a { color: var(--accent); }
+
+/* ─── ARCH CARDS ──────────────────────────────────── */
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+  margin: 16px 0 24px;
+}
+.arch-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.arch-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+  margin: 18px 0 26px;
+}
+.design-card {
+  background: linear-gradient(180deg, var(--bg-card) 0%, #f7f2e9 100%);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+.design-card h3 {
+  margin-bottom: 12px;
+}
+.design-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(90,158,71,0.12);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.design-preview {
+  margin: 14px 0 18px;
+}
+.mockup-shell {
+  border: 1px solid rgba(58,110,47,0.16);
+  border-radius: 18px;
+  background: #fcfaf5;
+  padding: 12px;
+  box-shadow: 0 10px 24px rgba(58,110,47,0.10);
+}
+.mockup-browser {
+  border: 1px solid rgba(58,110,47,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.mockup-topbar {
+  height: 30px;
+  background: linear-gradient(180deg, #f3efe7, #ebe4d7);
+  border-bottom: 1px solid rgba(58,110,47,0.12);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+.mockup-topbar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c8bfa8;
+}
+.mockup-screen {
+  aspect-ratio: 4 / 5;
+  min-height: 420px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+.mockup-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.mockup-brand,
+.mockup-chip,
+.mockup-stat,
+.mockup-card,
+.mockup-photo,
+.mockup-wide,
+.mockup-banner,
+.mockup-cta,
+.mockup-tag {
+  border-radius: 12px;
+}
+.mockup-brand {
+  width: 34%;
+  height: 12px;
+  background: rgba(58,110,47,0.8);
+}
+.mockup-links {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  justify-content: flex-end;
+}
+.mockup-chip {
+  width: 18%;
+  height: 9px;
+  background: rgba(58,110,47,0.18);
+}
+.mockup-chip.small {
+  width: 12%;
+}
+.mockup-hero {
+  display: grid;
+  gap: 10px;
+}
+.mockup-title {
+  width: 72%;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.88);
+}
+.mockup-subtitle {
+  width: 58%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.25);
+}
+.mockup-actions {
+  display: flex;
+  gap: 8px;
+}
+.mockup-cta {
+  height: 30px;
+  width: 34%;
+  background: var(--primary);
+}
+.mockup-cta.secondary {
+  width: 26%;
+  background: rgba(58,110,47,0.16);
+}
+.mockup-grid-2,
+.mockup-grid-3 {
+  display: grid;
+  gap: 8px;
+}
+.mockup-grid-2 {
+  grid-template-columns: 1.2fr 0.8fr;
+}
+.mockup-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.mockup-card,
+.mockup-photo,
+.mockup-wide,
+.mockup-banner,
+.mockup-stat {
+  background: rgba(58,110,47,0.08);
+}
+.mockup-card {
+  min-height: 74px;
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+}
+.mockup-line {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.22);
+}
+.mockup-line.wide { width: 88%; }
+.mockup-line.mid { width: 62%; }
+.mockup-line.short { width: 42%; }
+.mockup-photo {
+  min-height: 122px;
+  background: linear-gradient(135deg, rgba(90,158,71,0.18), rgba(58,110,47,0.05));
+  position: relative;
+  overflow: hidden;
+}
+.mockup-photo::before,
+.mockup-photo::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(58,110,47,0.14);
+}
+.mockup-photo::before {
+  width: 78px;
+  height: 78px;
+  right: -10px;
+  top: -14px;
+}
+.mockup-photo::after {
+  width: 56px;
+  height: 56px;
+  left: 12px;
+  bottom: -10px;
+}
+.mockup-wide {
+  min-height: 48px;
+  padding: 10px;
+}
+.mockup-banner {
+  min-height: 56px;
+  padding: 10px;
+  background: linear-gradient(90deg, rgba(58,110,47,0.92), rgba(90,158,71,0.9));
+}
+.mockup-banner .mockup-line {
+  background: rgba(255,255,255,0.55);
+}
+.mockup-banner .mockup-line.short {
+  background: rgba(255,255,255,0.35);
+}
+.mockup-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mockup-tag {
+  width: 54px;
+  height: 16px;
+  background: rgba(58,110,47,0.12);
+}
+.mockup-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.mockup-stat {
+  min-height: 60px;
+  padding: 10px;
+}
+.mockup-editorial .mockup-screen {
+  background: linear-gradient(180deg, #fdfbf7, #f6efe5);
+}
+.mockup-editorial .mockup-hero {
+  justify-items: center;
+  text-align: center;
+  padding: 8px 10px 2px;
+}
+.mockup-editorial .mockup-title,
+.mockup-editorial .mockup-subtitle {
+  margin-inline: auto;
+}
+.mockup-editorial .mockup-actions {
+  justify-content: center;
+}
+.mockup-editorial .mockup-grid-3 .mockup-card {
+  min-height: 84px;
+}
+.mockup-refuge .mockup-screen {
+  background:
+    radial-gradient(circle at top left, rgba(90,158,71,0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(58,110,47,0.12), transparent 30%),
+    linear-gradient(180deg, #f7f0e5, #fefbf6);
+}
+.mockup-refuge .mockup-grid-2 {
+  align-items: stretch;
+}
+.mockup-refuge .mockup-photo {
+  min-height: 160px;
+  border-radius: 24px;
+}
+.mockup-refuge .mockup-card,
+.mockup-refuge .mockup-wide {
+  border-radius: 22px;
+}
+.mockup-refuge .mockup-banner {
+  border-radius: 26px;
+}
+.mockup-local .mockup-screen {
+  background: linear-gradient(180deg, #f7f1e7 0%, #fffaf2 100%);
+}
+.mockup-local .mockup-nav {
+  background: rgba(58,110,47,0.92);
+  margin: -14px -14px 0;
+  padding: 12px 14px;
+}
+.mockup-local .mockup-brand {
+  background: rgba(255,255,255,0.85);
+}
+.mockup-local .mockup-chip {
+  background: rgba(255,255,255,0.28);
+}
+.mockup-local .mockup-hero {
+  padding-top: 8px;
+}
+.mockup-local .mockup-banner {
+  min-height: 70px;
+}
+.mockup-local .mockup-stat {
+  background: rgba(58,110,47,0.14);
+}
+.design-caption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.design-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.design-list li {
+  padding-left: 14px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text);
+}
+.design-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.recommendation-box {
+  background: linear-gradient(135deg, rgba(58,110,47,0.1), rgba(245,240,232,0.95));
+  border: 1px solid rgba(58,110,47,0.2);
+  border-left: 5px solid var(--primary);
+  border-radius: calc(var(--radius) + 2px);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.recommendation-box h3 {
+  margin-bottom: 10px;
+}
+.recommendation-box p + p {
+  margin-top: 8px;
+}
+.ui-direction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+  margin-top: 22px;
+}
+.ui-direction-card {
+  background: linear-gradient(180deg, #fffdf9, #f6efe4);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.ui-visual {
+  margin: 14px 0 16px;
+  border: 1px solid rgba(58,110,47,0.14);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(58,110,47,0.12);
+}
+.ui-window-bar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  background: linear-gradient(180deg, #f2eee6, #e8e2d6);
+  border-bottom: 1px solid rgba(58,110,47,0.1);
+}
+.ui-window-bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c9c0ac;
+}
+.ui-canvas {
+  aspect-ratio: 4 / 5;
+  min-height: 430px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.ui-option-a {
+  background: linear-gradient(180deg, #f8f2e8 0%, #fcfaf6 100%);
+}
+.ui-option-b {
+  background:
+    radial-gradient(circle at top left, rgba(111,155,95,0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(58,110,47,0.12), transparent 34%),
+    linear-gradient(180deg, #f6eee0 0%, #fffdf8 100%);
+}
+.ui-option-c {
+  background: linear-gradient(180deg, #f3eddf 0%, #fffaf1 100%);
+}
+.ui-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.ui-brandline {
+  width: 34%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.82);
+}
+.ui-navline {
+  display: flex;
+  gap: 6px;
+}
+.ui-navline span {
+  width: 34px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.16);
+}
+.ui-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 12px;
+  align-items: stretch;
+}
+.ui-copy {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+.ui-heading {
+  width: 82%;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.88);
+}
+.ui-heading.short {
+  width: 58%;
+}
+.ui-textline {
+  width: 72%;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(58,110,47,0.22);
+}
+.ui-textline.short {
+  width: 48%;
+}
+.ui-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.ui-button {
+  width: 96px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--primary);
+}
+.ui-button.secondary {
+  width: 74px;
+  background: rgba(58,110,47,0.14);
+}
+.ui-photo-main,
+.ui-photo-small,
+.ui-photo-tall {
+  background-size: cover;
+  background-position: center;
+  border-radius: 18px;
+}
+.ui-photo-main {
+  min-height: 184px;
+}
+.ui-photo-small {
+  min-height: 92px;
+}
+.ui-photo-tall {
+  min-height: 230px;
+}
+.ui-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.ui-mini-card,
+.ui-stat-card,
+.ui-banner-card {
+  border-radius: 16px;
+  padding: 10px;
+}
+.ui-mini-card {
+  min-height: 78px;
+  background: rgba(58,110,47,0.08);
+}
+.ui-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.ui-stat-card {
+  min-height: 66px;
+  background: rgba(58,110,47,0.12);
+}
+.ui-banner-card {
+  min-height: 58px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, rgba(58,110,47,0.94), rgba(90,158,71,0.92));
+}
+.ui-banner-card .ui-textline,
+.ui-banner-card .ui-heading {
+  background: rgba(255,255,255,0.54);
+}
+.ui-banner-card .ui-textline.short {
+  background: rgba(255,255,255,0.34);
+}
+.ui-stack {
+  display: grid;
+  gap: 10px;
+}
+.ui-collage {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+.ui-side-stack {
+  display: grid;
+  gap: 10px;
+}
+.ui-accent-strip {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  height: 82px;
+  background: linear-gradient(90deg, rgba(58,110,47,0.95), rgba(90,158,71,0.9));
+}
+.ui-option-c .ui-topline {
+  position: relative;
+  z-index: 1;
+  padding-top: 2px;
+}
+.ui-option-c .ui-brandline {
+  background: rgba(255,255,255,0.86);
+}
+.ui-option-c .ui-navline span {
+  background: rgba(255,255,255,0.3);
+}
+.ui-option-c .ui-hero-grid {
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+}
+.ui-palette {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 14px;
+}
+.ui-palette span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.ui-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.ui-bullets {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.ui-bullets li {
+  padding-left: 14px;
+  position: relative;
+  font-size: 14px;
+}
+.ui-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.arch-n {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.arch-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.arch-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── COLOR SWATCHES ──────────────────────────────── */
+.swatches {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 12px 0 18px;
+}
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+}
+.sw-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.sw-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1px;
+}
+.sw-hex {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── CODE BLOCK ──────────────────────────────────── */
+.code-block {
+  background: #1c2918;
+  color: #c8e6c0;
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.85;
+  overflow-x: auto;
+  margin: 16px 0;
+  border-left: 4px solid var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+.code-block .cd { color: #8fd472; font-weight: 700; }
+.code-block .cf { color: #e0e0e0; }
+.code-block .cm { color: #5c8a50; font-style: italic; }
+.code-block .cx { color: #ffc97a; }
+
+/* ─── INFO BOX ────────────────────────────────────── */
+.info-box {
+  background: rgba(58,110,47,0.07);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+}
+
+/* ─── DOCUMENT FOOTER ─────────────────────────────── */
+.doc-footer {
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 2.2;
+}
+.doc-footer strong { color: var(--primary-dark); }
+
+/* ─── PRINT ───────────────────────────────────────── */
+@media print {
+  @page { margin: 18mm; size: A4; }
+  .doc-header {
+    position: static;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .sidebar { display: none; }
+  .layout { display: block; max-width: 100%; }
+  .main-content { padding: 0; }
+  .cover { page-break-after: always; }
+  section { page-break-inside: avoid; margin-bottom: 32px; }
+  a { color: inherit !important; text-decoration: none; }
+  .code-block {
+    background: #f0f0f0 !important;
+    color: #333 !important;
+    border: 1px solid #ccc;
+    border-left: 4px solid #5a9e47;
+  }
+  .code-block .cd { color: #2d5625 !important; }
+  .code-block .cm { color: #777 !important; }
+  .code-block .cx { color: #8a6000 !important; }
+  table th { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .arch-card:hover { box-shadow: none; transform: none; }
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 980px) {
+  .sidebar { display: none; }
+  .layout { display: block; max-width: 100%; }
+  .main-content { padding: 32px 28px 64px; }
+  .arch-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+}
+@media (max-width: 600px) {
+  .header-org { display: none; }
+  .header-titles h1 { font-size: 14px; }
+  .header-date { display: none; }
+  .main-content { padding: 24px 16px 56px; }
+  .cover { padding: 36px 8px 44px; }
+  .arch-grid { grid-template-columns: 1fr 1fr; }
+  .design-grid { grid-template-columns: 1fr; }
+  .ui-direction-grid { grid-template-columns: 1fr; }
+  .ui-hero-grid,
+  .ui-collage { grid-template-columns: 1fr; }
+  table td:first-child { white-space: normal; width: 40%; }
+  .swatches { flex-direction: column; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ════ STICKY HEADER ════════════════════════════════════ -->
+<header class="doc-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="header-paw" aria-hidden="true">🐾</span>
+      <div class="header-titles">
+        <h1>Cahier des Charges — Site Vitrine CAT'S GARDEN</h1>
+        <div class="header-org">Association de Protection des Chats Errants du Quartier Frégeneuil/Sillac</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="version-badge">v1.0</span>
+      <span class="header-date">15 avril 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ════ SIDEBAR ════════════════════════════════════════ -->
+  <aside class="sidebar" aria-label="Sommaire">
+    <div class="sidebar-inner">
+      <div class="sidebar-label">Sommaire</div>
+      <nav>
+        <ul>
+          <li><a href="#s1"><span class="nav-num">1</span> Présentation du projet</a></li>
+          <li><a href="#s2"><span class="nav-num">2</span> Charte graphique</a></li>
+          <li><a href="#s3"><span class="nav-num">3</span> Architecture du site</a></li>
+          <li><a href="#s4"><span class="nav-num">4</span> Structure des fichiers</a></li>
+          <li><a href="#s5"><span class="nav-num">5</span> Étapes de réalisation</a></li>
+          <li><a href="#s6"><span class="nav-num">6</span> Critères de vérification</a></li>
+          <li><a href="#s7"><span class="nav-num">7</span> Décisions actées</a></li>
+          <li><a href="#s8"><span class="nav-num">8</span> UX retenue et designs UI</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-meta">
+        <strong>RNA</strong> W161010560<br>
+        <strong>SIREN</strong> 102953064<br>
+        Créée le 18 mars 2026
+      </div>
+    </div>
+  </aside>
+
+  <!-- ════ MAIN CONTENT ════════════════════════════════════ -->
+  <main class="main-content">
+
+    <!-- COVER ─────────────────────────────────────────── -->
+    <div class="cover">
+      <div class="cover-emblem" aria-hidden="true">🐱</div>
+      <h1 class="cover-title">Cahier des Charges<br>Site Vitrine CAT'S GARDEN</h1>
+      <p class="cover-subtitle">
+        Association de Protection des Chats Errants<br>
+        du Quartier Frégeneuil/Sillac
+      </p>
+      <div class="cover-tags">
+        <span class="cover-tag green">Version 1.0</span>
+        <span class="cover-tag outline">15 avril 2026</span>
+        <span class="cover-tag outline">RNA W161010560</span>
+        <span class="cover-tag outline">SIREN 102953064</span>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 1 ─────────────────────────────────── -->
+    <section id="s1">
+      <h2><span class="section-num">1</span> Présentation du projet</h2>
+
+      <div class="sub">
+        <h3>Contexte</h3>
+        <p>Créer un site vitrine <strong>one-page HTML + CSS</strong> pour l'association loi 1901 <strong>CAT'S GARDEN</strong>, afin de présenter sa mission, ses chats protégés, ses réseaux sociaux et un appel aux dons.</p>
+      </div>
+
+      <div class="sub">
+        <h3>Identité de l'association</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Champ</th><th>Valeur</th></tr></thead>
+            <tbody>
+              <tr><td>Nom court</td><td><strong>CAT'S GARDEN</strong></td></tr>
+              <tr><td>Nom officiel</td><td>Association de Protection des Chats Errants du Quartier Frégeneuil/Sillac</td></tr>
+              <tr><td>RNA</td><td><code>W161010560</code></td></tr>
+              <tr><td>SIREN</td><td><code>102953064</code></td></tr>
+              <tr><td>Date de création</td><td>18 mars 2026</td></tr>
+              <tr><td>TikTok</td><td><a href="https://www.tiktok.com/@catsgarden16" target="_blank" rel="noopener">@catsgarden16</a></td></tr>
+              <tr><td>Instagram</td><td><a href="https://www.instagram.com/catsgarden16" target="_blank" rel="noopener">catsgarden16</a></td></tr>
+              <tr><td>Lien dons</td><td><a href="https://linktr.ee/catsgarden16000" target="_blank" rel="noopener">linktr.ee/catsgarden16000</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub">
+        <h3>Mission de l'association</h3>
+        <ul class="mission">
+          <li>Nourrir les chats errants du quartier</li>
+          <li>Leur permettre d'avoir accès à des soins vétérinaires</li>
+          <li>Les stériliser pour endiguer la prolifération</li>
+          <li>Les accueillir en liberté sur le terrain de l'association</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 2 ─────────────────────────────────── -->
+    <section id="s2">
+      <h2><span class="section-num">2</span> Charte graphique</h2>
+
+      <p>Charte déduite du logo existant (<code>src/img/Logos.PNG</code> — 4 variantes de logo line art, style dessiné à la main).</p>
+
+      <div class="swatches">
+        <div class="swatch">
+          <div class="sw-dot" style="background:#f5f0e8;"></div>
+          <div>
+            <div class="sw-name">Fond crème / beige</div>
+            <div class="sw-hex">#f5f0e8</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#3a6e2f;"></div>
+          <div>
+            <div class="sw-name">Vert forêt — principal</div>
+            <div class="sw-hex">#3a6e2f</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#5a9e47;"></div>
+          <div>
+            <div class="sw-name">Vert clair — accent / CTA</div>
+            <div class="sw-hex">#5a9e47</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Élément</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>Couleur de fond</td><td>Crème / beige — <code>#f5f0e8</code></td></tr>
+            <tr><td>Couleur principale</td><td>Vert forêt — <code>#3a6e2f</code></td></tr>
+            <tr><td>Couleur accent (CTA, hover)</td><td>Vert clair — <code>#5a9e47</code></td></tr>
+            <tr><td>Typographie titre</td><td>Serif bold — <em>Playfair Display</em> (Google Fonts)</td></tr>
+            <tr><td>Typographie corps</td><td>Sans-serif lisible — <em>Lato</em> (Google Fonts)</td></tr>
+            <tr><td>Style global</td><td>Line art, minimaliste, chaleureux, nature</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 3 ─────────────────────────────────── -->
+    <section id="s3">
+      <h2><span class="section-num">3</span> Architecture du site — One-page (6 sections)</h2>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-n">Section 1</div>
+          <div class="arch-title">Header / Hero</div>
+          <div class="arch-desc">Logo + nom de l'association + baseline + navigation ancres</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-n">Section 2</div>
+          <div class="arch-title">Notre mission</div>
+          <div class="arch-desc">4 piliers : nourrissage, soins vétérinaires, stérilisation, accueil — icônes + texte</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-n">Section 3</div>
+          <div class="arch-title">Nos chats</div>
+          <div class="arch-desc">Grille CSS responsive — sélection de photos réelles des chats protégés</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-n">Section 4</div>
+          <div class="arch-title">Nous rejoindre</div>
+          <div class="arch-desc">TikTok (@catsgarden16) + Instagram (catsgarden16)</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-n">Section 5</div>
+          <div class="arch-title">Faire un don</div>
+          <div class="arch-desc">Section mise en avant — CTA bouton → linktr.ee/catsgarden16000</div>
+        </div>
+        <div class="arch-card">
+          <div class="arch-n">Section 6</div>
+          <div class="arch-title">Footer</div>
+          <div class="arch-desc">RNA W161010560 / SIREN 102953064 + réseaux sociaux + copyright</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Section</th><th>Contenu</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Header / Hero</td><td>Logo + nom de l'association + baseline + navigation ancres</td></tr>
+            <tr><td>2</td><td>Notre mission</td><td>4 piliers : nourrissage, soins vétérinaires, stérilisation, accueil — icônes + texte</td></tr>
+            <tr><td>3</td><td>Nos chats</td><td>Grille CSS responsive — sélection de photos réelles des chats protégés</td></tr>
+            <tr><td>4</td><td>Nous rejoindre</td><td>TikTok (@catsgarden16) + Instagram (catsgarden16)</td></tr>
+            <tr><td>5</td><td>Faire un don</td><td>Section mise en avant — CTA bouton → linktr.ee/catsgarden16000</td></tr>
+            <tr><td>6</td><td>Footer</td><td>RNA W161010560 / SIREN 102953064 + liens réseaux sociaux + copyright</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 4 ─────────────────────────────────── -->
+    <section id="s4">
+      <h2><span class="section-num">4</span> Structure des fichiers à créer</h2>
+
+      <div class="code-block"><span class="cd">catsgarden/</span>
+├── <span class="cf">index.html</span>
+├── <span class="cx">cahier-des-charges.html</span>  <span class="cm">← ce fichier</span>
+└── <span class="cd">src/</span>
+    ├── <span class="cd">css/</span>
+    │   └── <span class="cf">style.css</span>
+    ├── <span class="cd">img/</span>
+    │   ├── <span class="cx">Logos.PNG</span>          <span class="cm">(existant — 4 variantes logo)</span>
+    │   ├── <span class="cx">LOGO.jpg</span>           <span class="cm">(logo / variante exploitable)</span>
+    │   ├── <span class="cx">IMG_6212.JPG</span>       <span class="cm">(photo chat)</span>
+    │   ├── <span class="cx">IMG_6295.JPG</span>       <span class="cm">(photo chat)</span>
+    │   ├── <span class="cx">IMG_6384.JPG</span>       <span class="cm">(photo chat)</span>
+    │   └── <span class="cm">[autres photos et médias des chats disponibles dans le dossier]</span>
+    └── <span class="cd">docs/</span>
+        ├── <span class="cx">Statuts.pdf</span>        <span class="cm">(existant)</span>
+        ├── <span class="cx">Récépissé decla Asso.pdf</span>  <span class="cm">(existant)</span>
+        ├── <span class="cx">infos.jpg</span>          <span class="cm">(existant)</span>
+        └── <span class="cx">RIB CAT S GARDEN.pdf</span> <span class="cm">(existant — usage interne)</span></div>
+
+      <div class="sub">
+        <h3>Documents officiels disponibles dans <code>src/docs/</code></h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Fichier</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Statuts.pdf</td><td>Statuts officiels — source pour les textes de mission</td></tr>
+              <tr><td>Récépissé decla Asso.pdf</td><td>Récépissé de déclaration officielle</td></tr>
+              <tr><td>infos.jpg</td><td>Extrait du registre RNA / SIREN</td></tr>
+              <tr><td>RIB CAT S GARDEN.pdf</td><td>Coordonnées bancaires (usage interne uniquement)</td></tr>
+              <tr><td>Dossier src/img/</td><td>Photos réelles des chats désormais disponibles pour la galerie, les héros et les compositions éditoriales</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 5 ─────────────────────────────────── -->
+    <section id="s5">
+      <h2><span class="section-num">5</span> Étapes de réalisation</h2>
+
+      <ol class="steps">
+        <li>
+          <span class="step-n">1</span>
+          <div class="step-body">
+            <strong>Préparation assets</strong>
+            <span>Extraire la variante logo choisie depuis <code>Logos.PNG</code> (PNG transparent ou retracé en SVG)</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">2</span>
+          <div class="step-body">
+            <strong>Structure HTML</strong>
+            <span>Créer <code>index.html</code> avec les 6 sections et ancres de navigation</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">3</span>
+          <div class="step-body">
+            <strong>CSS charte graphique</strong>
+            <span>Créer <code>src/css/style.css</code> avec variables CSS (couleurs, typos), layout mobile-first</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">4</span>
+          <div class="step-body">
+            <strong>Contenu textuel</strong>
+            <span>Intégrer les textes de mission issus des <code>Statuts.pdf</code></span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">5</span>
+          <div class="step-body">
+            <strong>Galerie photos</strong>
+            <span>Grille CSS avec sélection éditoriale de photos réelles, optimisation web et cadrages harmonisés</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">6</span>
+          <div class="step-body">
+            <strong>Section dons</strong>
+            <span>CTA proéminent avec bouton vers <a href="https://linktr.ee/catsgarden16000" target="_blank" rel="noopener">Linktree</a></span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">7</span>
+          <div class="step-body">
+            <strong>Tests responsive</strong>
+            <span>Vérifier l'affichage sur 375 px (mobile), 768 px (tablette) et 1280 px (desktop)</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-n">8</span>
+          <div class="step-body">
+            <strong>Déploiement Netlify</strong>
+            <span>Drag &amp; drop du dossier sur <a href="https://netlify.com" target="_blank" rel="noopener">netlify.com</a> — gratuit, sans configuration</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ─── SECTION 6 ─────────────────────────────────── -->
+    <section id="s6">
+      <h2><span class="section-num">6</span> Critères de vérification</h2>
+
+      <ul class="checklist">
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>Responsive correct sur mobile (375 px), tablette (768 px), desktop (1280 px)</span>
+        </li>
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>Lien Linktree actif et CTA visible dans la section dons</span>
+        </li>
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>Liens TikTok et Instagram fonctionnels</span>
+        </li>
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>RNA <code>W161010560</code> et SIREN <code>102953064</code> affichés dans le footer</span>
+        </li>
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>Validation W3C HTML / CSS sans erreurs</span>
+        </li>
+        <li>
+          <span class="check" aria-hidden="true"></span>
+          <span>Score Lighthouse accessibilité ≥ 80</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─── SECTION 7 ─────────────────────────────────── -->
+    <section id="s7">
+      <h2><span class="section-num">7</span> Décisions actées</h2>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Décision</th><th>Choix retenu</th><th>Motif</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Moyen de contact</td>
+              <td>Réseaux sociaux uniquement (pas d'email ni formulaire)</td>
+              <td>Choix du client</td>
+            </tr>
+            <tr>
+              <td>Photos des chats</td>
+              <td>Photos réelles disponibles dans <code>src/img</code></td>
+              <td>Permet d'intégrer une galerie réelle et des héros plus incarnés</td>
+            </tr>
+            <tr>
+              <td>Hébergement</td>
+              <td>Netlify (drag &amp; drop)</td>
+              <td>Gratuit, simple, sans configuration</td>
+            </tr>
+            <tr>
+              <td>Stack technique</td>
+              <td>HTML + CSS pur (sans framework)</td>
+              <td>Simplicité, légèreté</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 8 ─────────────────────────────────── -->
+    <section id="s8">
+      <h2><span class="section-num">8</span> UX retenue et 3 designs UI</h2>
+
+      <div class="info-box">
+        <strong>UX retenue :</strong> <strong>Refuge vivant</strong>.
+        La structure de parcours reste la même dans les trois propositions ci-dessous : expérience chaleureuse, photos très présentes, hiérarchie claire et appels au don visibles tôt dans la page.
+      </div>
+
+      <p>Les trois pistes suivantes ne changent pas l'expérience utilisateur validée. Elles proposent trois habillages d'interface différents à partir des photos réelles désormais disponibles dans <code>src/img</code>, afin de choisir une identité visuelle précise avant production.</p>
+
+      <div class="ui-direction-grid">
+        <article class="ui-direction-card">
+          <span class="design-kicker">Design UI 1</span>
+          <h3>Herbier sensible</h3>
+          <p class="ui-meta">Une interface éditoriale et raffinée, qui met les chats en scène comme des portraits sensibles.</p>
+          <div class="ui-palette">
+            <span style="background:#f5f0e8"></span>
+            <span style="background:#d8c7ae"></span>
+            <span style="background:#3a6e2f"></span>
+            <span style="background:#8ea37f"></span>
+          </div>
+          <div class="ui-visual">
+            <div class="ui-window-bar"><span></span><span></span><span></span></div>
+            <div class="ui-canvas ui-option-a">
+              <div class="ui-topline">
+                <div class="ui-brandline"></div>
+                <div class="ui-navline"><span></span><span></span><span></span></div>
+              </div>
+              <div class="ui-hero-grid">
+                <div class="ui-copy">
+                  <div class="ui-heading"></div>
+                  <div class="ui-heading short"></div>
+                  <div class="ui-textline"></div>
+                  <div class="ui-textline short"></div>
+                  <div class="ui-actions"><div class="ui-button"></div><div class="ui-button secondary"></div></div>
+                </div>
+                <div class="ui-photo-main" style="background-image:url('src/img/IMG_6212.JPG');"></div>
+              </div>
+              <div class="ui-cards-3">
+                <div class="ui-mini-card"><div class="ui-heading short"></div><div class="ui-textline"></div></div>
+                <div class="ui-mini-card"><div class="ui-heading short"></div><div class="ui-textline"></div></div>
+                <div class="ui-mini-card"><div class="ui-heading short"></div><div class="ui-textline"></div></div>
+              </div>
+              <div class="ui-collage">
+                <div class="ui-photo-small" style="background-image:url('src/img/IMG_6295.JPG');"></div>
+                <div class="ui-photo-small" style="background-image:url('src/img/IMG_6384.JPG');"></div>
+              </div>
+              <div class="ui-banner-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+            </div>
+          </div>
+          <ul class="ui-bullets">
+            <li><strong>Direction :</strong> plus premium, plus calme, plus éditoriale.</li>
+            <li><strong>Photos :</strong> portraits cadrés, respirations généreuses, mise en page élégante.</li>
+            <li><strong>Typographie :</strong> serif marquée pour les titres, détails plus raffinés.</li>
+            <li><strong>À privilégier si :</strong> l'association veut une image très crédible et sensible.</li>
+          </ul>
+        </article>
+
+        <article class="ui-direction-card">
+          <span class="design-kicker">Design UI 2</span>
+          <h3>Carnet du refuge</h3>
+          <p class="ui-meta">Une interface organique et immersive qui donne l'impression d'entrer dans le quotidien du refuge.</p>
+          <div class="ui-palette">
+            <span style="background:#f7eede"></span>
+            <span style="background:#e4d2b6"></span>
+            <span style="background:#587c49"></span>
+            <span style="background:#b7c8a8"></span>
+          </div>
+          <div class="ui-visual">
+            <div class="ui-window-bar"><span></span><span></span><span></span></div>
+            <div class="ui-canvas ui-option-b">
+              <div class="ui-topline">
+                <div class="ui-brandline"></div>
+                <div class="ui-navline"><span></span><span></span></div>
+              </div>
+              <div class="ui-hero-grid">
+                <div class="ui-copy">
+                  <div class="ui-heading"></div>
+                  <div class="ui-heading short"></div>
+                  <div class="ui-textline"></div>
+                  <div class="ui-textline short"></div>
+                  <div class="ui-actions"><div class="ui-button"></div><div class="ui-button secondary"></div></div>
+                </div>
+                <div class="ui-photo-tall" style="background-image:url('src/img/IMG_6384.JPG');"></div>
+              </div>
+              <div class="ui-collage">
+                <div class="ui-photo-main" style="background-image:url('src/img/IMG_6295.JPG');"></div>
+                <div class="ui-side-stack">
+                  <div class="ui-photo-small" style="background-image:url('src/img/IMG_6212.JPG');"></div>
+                  <div class="ui-mini-card"><div class="ui-textline"></div><div class="ui-textline short"></div></div>
+                </div>
+              </div>
+              <div class="ui-banner-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+            </div>
+          </div>
+          <ul class="ui-bullets">
+            <li><strong>Direction :</strong> chaleureuse, organique, très incarnée.</li>
+            <li><strong>Photos :</strong> collages souples, images héro plus présentes, ambiance refuge.</li>
+            <li><strong>Composants :</strong> blocs arrondis, couches visuelles plus vivantes.</li>
+            <li><strong>À privilégier si :</strong> l'attachement émotionnel est le levier principal.</li>
+          </ul>
+          <div class="info-box" style="margin-top:16px">
+            🎨 <strong>Maquette complète disponible :</strong> <a href="mockup-ui2.html" target="_blank" rel="noopener">Ouvrir la maquette UI 2 — Carnet du refuge →</a>
+          </div>
+        </article>
+
+        <article class="ui-direction-card">
+          <span class="design-kicker">Design UI 3</span>
+          <h3>Campagne locale</h3>
+          <p class="ui-meta">Une interface plus directe et plus énergique, pensée pour capter vite l'attention et pousser à l'action.</p>
+          <div class="ui-palette">
+            <span style="background:#f2ead8"></span>
+            <span style="background:#d8c59a"></span>
+            <span style="background:#2f5c28"></span>
+            <span style="background:#7cab65"></span>
+          </div>
+          <div class="ui-visual">
+            <div class="ui-window-bar"><span></span><span></span><span></span></div>
+            <div class="ui-canvas ui-option-c">
+              <div class="ui-accent-strip"></div>
+              <div class="ui-topline">
+                <div class="ui-brandline"></div>
+                <div class="ui-navline"><span></span><span></span></div>
+              </div>
+              <div class="ui-hero-grid">
+                <div class="ui-copy">
+                  <div class="ui-heading"></div>
+                  <div class="ui-heading short"></div>
+                  <div class="ui-textline"></div>
+                  <div class="ui-actions"><div class="ui-button"></div><div class="ui-button secondary"></div></div>
+                </div>
+                <div class="ui-photo-main" style="background-image:url('src/img/IMG_6295.JPG');"></div>
+              </div>
+              <div class="ui-stat-row">
+                <div class="ui-stat-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+                <div class="ui-stat-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+                <div class="ui-stat-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+              </div>
+              <div class="ui-cards-3">
+                <div class="ui-mini-card"><div class="ui-textline"></div><div class="ui-textline short"></div></div>
+                <div class="ui-mini-card"><div class="ui-textline"></div><div class="ui-textline short"></div></div>
+                <div class="ui-mini-card"><div class="ui-textline"></div><div class="ui-textline short"></div></div>
+              </div>
+              <div class="ui-banner-card"><div class="ui-heading short"></div><div class="ui-textline short"></div></div>
+            </div>
+          </div>
+          <ul class="ui-bullets">
+            <li><strong>Direction :</strong> plus militante, plus contrastée, plus rapide à lire.</li>
+            <li><strong>Photos :</strong> utilisées comme preuve terrain au service des CTA.</li>
+            <li><strong>UI :</strong> bandeaux forts, stats visibles, actions répétées.</li>
+            <li><strong>À privilégier si :</strong> la priorité est la conversion vers les dons et le suivi social.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="recommendation-box">
+        <h3>Recommandation</h3>
+        <p><strong>UX conservée :</strong> Refuge vivant.</p>
+        <p><strong>UI recommandée par défaut :</strong> <strong>Carnet du refuge</strong>, car c'est la direction la plus cohérente avec l'UX retenue, le logo existant et les photos réelles désormais disponibles.</p>
+        <p><strong>Alternative plus premium :</strong> Herbier sensible. <strong>Alternative plus militante :</strong> Campagne locale.</p>
+        <p style="margin-top:12px">🎨 <strong>Maquette complète UI 2 :</strong> <a href="mockup-ui2.html" target="_blank" rel="noopener">mockup-ui2.html</a> — page HTML navigable avec photos réelles, toutes les sections du site, responsive.</p>
+      </div>
+    </section>
+
+    <!-- DOCUMENT FOOTER ─────────────────────────────── -->
+    <footer class="doc-footer">
+      <strong>CAT'S GARDEN</strong> — Association de Protection des Chats Errants du Quartier Frégeneuil/Sillac<br>
+      RNA W161010560 &nbsp;·&nbsp; SIREN 102953064 &nbsp;·&nbsp; Créée le 18 mars 2026<br>
+      Cahier des charges v1.0 — 15 avril 2026
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
