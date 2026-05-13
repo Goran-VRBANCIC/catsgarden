@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAT'S GARDEN — Maquette complète · Design UI 2 : Carnet du refuge</title>
-  <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap');
 
 /* ─── VARIABLES ────────────────────────────────── */
@@ -68,7 +61,13 @@ a { text-decoration: none; }
   color: var(--primary);
   letter-spacing: -0.01em;
 }
-.nav-logo .paw { font-size: 20px; }
+.nav-logo-mark {
+  width: 1.25em;
+  height: 1.25em;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -374,29 +373,57 @@ a { text-decoration: none; }
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
 }
-.gallery-item {
+.cat-card {
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(228,210,182,0.82);
   border-radius: 24px;
+  padding: 12px 12px 18px;
+  box-shadow: 0 12px 34px rgba(58,110,47,0.08);
+  transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s;
+}
+.cat-card:hover {
+  border-color: rgba(88,124,73,0.38);
+  box-shadow: 0 18px 44px rgba(58,110,47,0.13);
+  transform: translateY(-3px);
+}
+.cat-card-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
   overflow: hidden;
-  position: relative;
   background: var(--taupe);
 }
-.gallery-item img {
+.cat-card-photo img {
   width: 100%;
   height: 100%;
+  margin: 0 auto;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  transform: translateZ(0) scale(1.01);
+  backface-visibility: hidden;
+  transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change: transform;
 }
-.gallery-item:hover img { transform: scale(1.06); }
-.gi-1  { grid-column: span 5; aspect-ratio: 4 / 5; }
-.gi-2  { grid-column: span 4; aspect-ratio: 1 / 1; }
-.gi-3  { grid-column: span 3; aspect-ratio: 3 / 4; }
-.gi-4  { grid-column: span 4; aspect-ratio: 4 / 3; }
-.gi-5  { grid-column: span 4; aspect-ratio: 4 / 3; }
-.gi-6  { grid-column: span 4; aspect-ratio: 4 / 3; }
+.cat-card:hover .cat-card-photo img { transform: translateZ(0) scale(1.07); }
+.cat-card-name {
+  margin-top: 14px;
+  color: var(--primary);
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+.cat-card-sex {
+  color: var(--sage);
+  font-family: var(--font-body);
+  font-size: 0.82em;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: 0.04em;
+}
 .gallery-cta {
   display: flex;
   justify-content: center;
@@ -430,6 +457,17 @@ a { text-decoration: none; }
 .social-card-instagram {
   background: linear-gradient(135deg, #6e2fa3 0%, #c93c3c 55%, #f5a623 100%);
 }
+.contact-direct {
+  margin-top: 28px;
+  color: var(--text-muted);
+  font-size: 15px;
+  text-align: center;
+}
+.contact-direct a {
+  color: var(--primary);
+  font-weight: 700;
+}
+.contact-direct a:hover { color: var(--sage); }
 .social-platform {
   font-size: 12px;
   font-weight: 700;
@@ -645,6 +683,54 @@ a { text-decoration: none; }
   fill: var(--white);
 }
 
+/* LEGAL PAGE */
+.legal-page {
+  padding: 72px 40px 92px;
+  background: var(--bg);
+}
+.legal-content {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.legal-content h1 {
+  font-family: var(--font-title);
+  font-size: clamp(34px, 4vw, 52px);
+  color: var(--primary);
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+.legal-intro {
+  color: var(--text-muted);
+  font-size: 17px;
+  margin-bottom: 44px;
+}
+.legal-section {
+  border-top: 1px solid rgba(228,210,182,0.9);
+  padding: 28px 0;
+}
+.legal-section h2 {
+  color: var(--primary);
+  font-family: var(--font-title);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.legal-section p,
+.legal-section li {
+  color: var(--text-muted);
+  font-size: 15.5px;
+  line-height: 1.8;
+}
+.legal-section ul {
+  padding-left: 20px;
+}
+.legal-section a {
+  color: var(--primary);
+  font-weight: 700;
+}
+.legal-section a:hover {
+  color: var(--sage);
+}
+
 /* ─── MOCKUP BADGE ───────────────────────────────── */
 .mockup-banner {
   position: fixed;
@@ -674,13 +760,7 @@ a { text-decoration: none; }
   .hero-badge { left: 0; }
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
   .mission-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(6, 1fr); }
-  .gi-1 { grid-column: span 6; }
-  .gi-2 { grid-column: span 3; aspect-ratio: 1/1; }
-  .gi-3 { grid-column: span 3; aspect-ratio: 1/1; }
-  .gi-4 { grid-column: span 6; aspect-ratio: 16/7; }
-  .gi-5 { grid-column: span 3; aspect-ratio: 1/1; }
-  .gi-6 { grid-column: span 3; aspect-ratio: 1/1; }
+  .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .social-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: span 2; }
@@ -692,276 +772,11 @@ a { text-decoration: none; }
   .stats-strip { padding: 24px 20px; }
   .mission-card { flex-direction: column; gap: 14px; }
   .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .gi-1, .gi-2, .gi-3, .gi-4, .gi-5, .gi-6 { grid-column: span 1; aspect-ratio: 1/1; }
+  .cat-card { border-radius: 18px; padding: 8px 8px 13px; }
+  .cat-card-photo { border-radius: 13px; }
+  .cat-card-name { font-size: 18px; margin-top: 10px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
   .site-footer { padding: 44px 20px 32px; }
 }
-  </style>
-</head>
-<body>
-
-
-<!-- ════ NAVIGATION ══════════════════════════════════ -->
-<nav class="site-nav" aria-label="Navigation principale">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <span class="paw" aria-hidden="true">🐾</span>
-      CAT'S GARDEN
-    </a>
-    <ul class="nav-links" role="list">
-      <li><a href="#mission">Notre mission</a></li>
-      <li><a href="#nos-chats">Nos chats</a></li>
-      <li><a href="#rejoindre">Nous rejoindre</a></li>
-      <li><a href="#don" class="nav-cta">Faire un don ♥</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ════ HERO ═════════════════════════════════════════ -->
-<section class="hero" id="hero">
-  <div class="hero-bg-blob b1" aria-hidden="true"></div>
-  <div class="hero-bg-blob b2" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-logo-group">
-      <div class="hero-logo-group">
-        <img src="src/img/icone3.jpg" alt="Logo CAT'S GARDEN" class="hero-logo">
-        <span class="hero-tag">🌿 Association loi 1901 · Fondée en 2026</span>
-      </div>
-      </div>
-      <h1 class="hero-title">
-        Protéger,<br>
-        soigner,<br>
-        <em>aimer.</em>
-      </h1>
-      <p class="hero-subtitle">
-        CAT'S GARDEN est une association dédiée à la protection des chats errants du quartier Frégeneuil/Sillac.
-        Chaque chat mérite un refuge, des soins et de l'amour.
-      </p>
-      <div class="hero-actions">
-        <a href="#don" class="btn-primary">Faire un don ♥</a>
-        <a href="#mission" class="btn-secondary">Notre mission →</a>
-      </div>
-    </div>
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-frame">
-        <img src="src/img/IMG_6384.JPG" alt="Un chat protégé par l'association CAT'S GARDEN">
-      </div>
-      <div class="hero-badge" aria-hidden="true">
-        <span class="badge-num">10+</span>
-        <span class="badge-label">chats<br>protégés</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════ STATS ════════════════════════════════════════ -->
-<div class="stats-strip" role="region" aria-label="Chiffres clés">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-num">10+</div>
-      <div class="stat-label">Chats pris en charge</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Financé par vos dons</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">4</div>
-      <div class="stat-label">Piliers d'action</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">2026</div>
-      <div class="stat-label">Année de fondation</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════ MISSION ══════════════════════════════════════ -->
-<section class="mission" id="mission">
-  <div class="section-wrap">
-    <span class="section-eyebrow">Ce que nous faisons</span>
-    <h2 class="section-title">Notre mission</h2>
-    <p class="section-subtitle">
-      Quatre engagements au quotidien pour offrir aux chats errants une vie digne et sereine.
-    </p>
-    <div class="mission-grid">
-      <div class="mission-card">
-        <div class="mission-icon" aria-hidden="true">🍽️</div>
-        <div class="mission-body">
-          <h3>Nourrir</h3>
-          <p>Nourrissage régulier des chats errants avec des points de distribution fixes et des tournées quotidiennes dans le quartier.</p>
-        </div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-icon" aria-hidden="true">🏥</div>
-        <div class="mission-body">
-          <h3>Soigner</h3>
-          <p>Accès aux soins vétérinaires pour tous nos chats : vaccinations, traitements, urgences — tout pris en charge grâce à vos dons.</p>
-        </div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-icon" aria-hidden="true">✂️</div>
-        <div class="mission-body">
-          <h3>Stériliser</h3>
-          <p>La stérilisation est notre outil principal contre la surpopulation. Nous agissons en amont pour éviter la souffrance de futurs chats abandonnés.</p>
-        </div>
-      </div>
-      <div class="mission-card">
-        <div class="mission-icon" aria-hidden="true">🏡</div>
-        <div class="mission-body">
-          <h3>Accueillir</h3>
-          <p>Les chats qui ne peuvent pas être relâchés vivent en liberté sur le terrain de l'association, dans un espace sécurisé et respectueux.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════ GALLERY ══════════════════════════════════════ -->
-<section class="gallery" id="nos-chats">
-  <div class="gallery-header">
-    <span class="section-eyebrow">La colonie</span>
-    <h2 class="section-title">Nos chats</h2>
-    <p class="section-subtitle" style="margin-bottom:0">
-      Ils ont trouvé refuge grâce à votre soutien. Voici quelques-uns de nos pensionnaires.
-    </p>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item gi-1">
-      <img src="src/img/IMG_6295.JPG" alt="Chat du refuge">
-    </div>
-    <div class="gallery-item gi-2">
-      <img src="src/img/IMG_6212.JPG" alt="Chat du refuge">
-    </div>
-    <div class="gallery-item gi-3">
-      <img src="src/img/IMG_6158.JPG" alt="Chat du refuge">
-    </div>
-    <div class="gallery-item gi-4">
-      <img src="src/img/HRYE4953.JPG" alt="Chat du refuge">
-    </div>
-    <div class="gallery-item gi-5">
-      <img src="src/img/MRVK7782.JPG" alt="Chat du refuge">
-    </div>
-    <div class="gallery-item gi-6">
-      <img src="src/img/IMG_5642.JPG" alt="Chat du refuge">
-    </div>
-  </div>
-  <div class="gallery-cta">
-    <a href="#rejoindre" class="btn-secondary">Voir plus sur nos réseaux sociaux →</a>
-  </div>
-</section>
-
-<!-- ════ SOCIAL ═══════════════════════════════════════ -->
-<section class="social" id="rejoindre">
-  <div class="section-wrap">
-    <span class="section-eyebrow">Communauté</span>
-    <h2 class="section-title">Nous rejoindre</h2>
-    <p class="section-subtitle">
-      Suivez notre quotidien au refuge, partagez nos publications et aidez-nous à faire connaître l'association.
-    </p>
-    <div class="social-grid">
-      <div class="social-card social-card-tiktok">
-        <div class="social-platform">TikTok</div>
-        <div class="social-handle">@catsgarden16</div>
-        <p class="social-desc">
-          Nourrissage, câlins, arrivées et petites victoires du quotidien. Rejoignez notre communauté sur TikTok !
-        </p>
-        <a href="https://www.tiktok.com/@catsgarden16" target="_blank" rel="noopener" class="social-btn">
-          Suivre sur TikTok →
-        </a>
-        <span class="social-deco" aria-hidden="true">🎵</span>
-      </div>
-      <div class="social-card social-card-instagram">
-        <div class="social-platform">Instagram</div>
-        <div class="social-handle">catsgarden16</div>
-        <p class="social-desc">
-          Photos et histoires de nos chats. Chaque post raconte une vie sauvée. Suivez-nous pour ne rien manquer.
-        </p>
-        <a href="https://www.instagram.com/catsgarden16" target="_blank" rel="noopener" class="social-btn">
-          Suivre sur Instagram →
-        </a>
-        <span class="social-deco" aria-hidden="true">📸</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════ DONATE ═══════════════════════════════════════ -->
-<section class="donate" id="don">
-  <div class="donate-blob db1" aria-hidden="true"></div>
-  <div class="donate-blob db2" aria-hidden="true"></div>
-  <div class="donate-inner">
-    <div class="donate-tag">♥ Faire un geste</div>
-    <h2 class="donate-title">
-      Chaque don compte,<br>
-      <em>chaque vie aussi.</em>
-    </h2>
-    <p class="donate-text">
-      Vos dons financent les soins vétérinaires, la nourriture, les stérilisations et l'entretien du terrain d'accueil.
-      Sans vous, rien n'est possible.
-    </p>
-    <a href="https://linktr.ee/catsgarden16000" target="_blank" rel="noopener" class="donate-btn">
-      Je fais un don ♥
-    </a>
-    <p class="donate-note">Via Linktree · Sécurisé · Association loi 1901 déclarée</p>
-  </div>
-</section>
-
-<!-- ════ FOOTER ═══════════════════════════════════════ -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span aria-hidden="true">🐾</span>
-          CAT'S GARDEN
-        </div>
-        <p>
-          Association de Protection des Chats Errants du Quartier Frégeneuil/Sillac.
-          Déclarée le 18 mars 2026.
-        </p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#mission">Notre mission</a></li>
-          <li><a href="#nos-chats">Nos chats</a></li>
-          <li><a href="#rejoindre">Nous rejoindre</a></li>
-          <li><a href="#don">Faire un don</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Réseaux &amp; liens</h4>
-        <ul>
-          <li><a href="https://www.tiktok.com/@catsgarden16" target="_blank" rel="noopener">TikTok @catsgarden16</a></li>
-          <li><a href="https://www.instagram.com/catsgarden16" target="_blank" rel="noopener">Instagram catsgarden16</a></li>
-          <li><a href="https://linktr.ee/catsgarden16000" target="_blank" rel="noopener">Dons (Linktree)</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        <strong>CAT'S GARDEN</strong> — Association de Protection des Chats Errants du Quartier Frégeneuil/Sillac<br>
-        RNA <code>W161010560</code> &nbsp;·&nbsp; SIREN <code>102953064</code> &nbsp;·&nbsp; Association loi 1901<br>
-        © 2026 CAT'S GARDEN — Tous droits réservés
-      </div>
-      <div class="footer-socials">
-        <a href="https://www.tiktok.com/@catsgarden16" class="footer-social-btn" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/catsgarden16" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-        </a>
-        <a href="https://linktr.ee/catsgarden16000" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Linktree">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.953 15.066c-.08.163-.08.324-.08.486.08.648.566 1.134 1.214 1.134h1.862v4.175c0 .728.566 1.296 1.295 1.296.73 0 1.296-.568 1.296-1.296v-4.175h1.862c.648 0 1.134-.486 1.214-1.134 0-.162 0-.323-.08-.486l-3.643-6.446a.34.34 0 0 0-.324-.162.34.34 0 0 0-.324.162l-3.292 6.446zm3.292-13.85L7.47 7.06c-.162.243-.162.567 0 .81.162.243.405.324.648.324h1.781v2.835c0 .486.405.891.891.891h2.268c.486 0 .891-.405.891-.891V8.194h1.781c.243 0 .486-.081.648-.324.162-.243.162-.567 0-.81L12.59 1.216a.648.648 0 0 0-1.134 0h-.081l-.13-.001z"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
